@@ -41,3 +41,6 @@ else
     git pull origin
 fi
 
+# create build dir
+cd ../../
+mkdir build
