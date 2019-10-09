@@ -25,53 +25,21 @@ RUN groupadd -g $host_gid $USER_NAME && useradd -g $host_gid -m -s /bin/bash -u 
 # set user name
 USER $USER_NAME
 
-ENV YOCTO_INSTALL_PATH /home/$USER_NAME
+ENV YOCTO_INSTALL_PATH /home/$USER_NAME/poky
 ENV BUILD_OUTPUT_DIR /home/$USER_NAME/build
 
 # mkdir
+RUN mkdir -p $YOCTO_INSTALL_PATH
 RUN mkdir -p $BUILD_OUTPUT_DIR
 
-WORKDIR ${BUILD_OUTPUT_DIR}
+# copy from host to container
+COPY ./poky $YOCTO_INSTALL_PATH
 
-RUN mkdir -p conf
-
-# Set the Yocto release
-ENV YOCTO_RELEASE "warrior"
-# Set the Qt version
-ENV QT_RELEASE "5.13"
-
-# Clone the repositories of the meta layers into the directory $YOCTO_INSTALL_PATH
 WORKDIR ${YOCTO_INSTALL_PATH}
-
-# Install Poky
-RUN git clone -b ${YOCTO_RELEASE} git://git.yoctoproject.org/poky.git
-
-WORKDIR poky
-
-RUN git clone -b ${YOCTO_RELEASE} https://github.com/west151/meta-snake
-RUN git clone -b ${YOCTO_RELEASE} git://git.openembedded.org/meta-openembedded
-RUN git clone -b ${YOCTO_RELEASE} git://git.yoctoproject.org/meta-raspberrypi
-RUN git clone -b ${QT_RELEASE} git://code.qt.io/yocto/meta-qt5.git
-
-#COPY bblayers.conf ../build/conf/bblayers.conf
-#COPY local.conf ../build/conf/local.conf
-
-#
-RUN cp $YOCTO_INSTALL_PATH/poky/meta-snake/conf/bblayers.conf.docker ../build/conf/bblayers.conf
-RUN cp $YOCTO_INSTALL_PATH/poky/meta-snake/conf/local.conf.example ../build/conf/local.conf
-
-#
-#CMD /bin/sh -c "cp ./meta-snake/conf/bblayers.conf.docker ../build/conf/bblayers.conf"
-#CMD /bin/sh -c "cp ./meta-snake/conf/local.conf.example ../build/conf/local.conf"
 
 # WaveShare Compute Module IO Board Plus
 CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake console-image"
 
-# Prepare Yocto's build environment. If TEMPLATECONF is set, the script oe-init-build-env will
-# install the customised files bblayers.conf and local.conf. This script initialises the Yocto
-# build environment. The bitbake command builds the rootfs for our embedded device.
-#WORKDIR $BUILD_OUTPUT_DIR
-#ENV TEMPLATECONF=$BUILD_INPUT_DIR/$PROJECT/sources/meta-$PROJECT/custom
-#CMD source $BUILD_INPUT_DIR/$PROJECT/sources/poky/oe-init-build-env build \
-#    && bitbake $PROJECT-image
+# build sdk
+CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake meta-toolchain-qt5"
 

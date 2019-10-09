@@ -41,6 +41,22 @@ else
     git pull origin
 fi
 
-# create build dir
+# создаем папку "build" для совместного использования с контенером 
 cd ../../
-mkdir build
+if ! [ -d $(pwd)/build ];
+then
+    # mkdir build
+    mkdir build
+    mkdir -p build/conf
+fi
+
+# копируем конфигурационные файлы
+cp poky/meta-snake/conf/bblayers.conf.docker build/conf/bblayers.conf
+cp poky/meta-snake/conf/local.conf.example build/conf/local.conf
+
+# build docker image
+docker build . --tag snake-wboard-image:latest
+#docker build --no-cache . --tag snake-wboard-image:latest
+
+# run docker
+docker run --user=user:user -it --rm -v $PWD/build:/home/user/build snake-wboard-image:latest
