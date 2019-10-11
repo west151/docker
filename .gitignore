@@ -1,2 +1,4 @@
 raspberry/poky/
 raspberry/build/
+raspberry-zero/poky/
+raspberry-zero/build/

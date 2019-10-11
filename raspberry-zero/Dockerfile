@@ -37,6 +37,6 @@ COPY ./poky $YOCTO_INSTALL_PATH
 
 WORKDIR ${YOCTO_INSTALL_PATH}
 
-# WaveShare Compute Module IO Board Plus and SDK
-CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake snake-wboard-image && bitbake meta-toolchain-qt5"
+# Raspberry Pi Zero Wi-Fi and SDK
+CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake snake-zboard-image && bitbake meta-toolchain-qt5"
 

@@ -10,7 +10,8 @@ then
     echo 'Clone poky'
     git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/poky.git poky
     cd poky
-    git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake
+    #git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake-zero
+    git clone -b master https://github.com/west151/meta-snake-zero
     git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded
     git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi
     git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git
@@ -20,8 +21,8 @@ else
     git fetch
     git pull origin
     #
-    echo 'Update meta-snake' $YOCTO_BRANCH
-    cd meta-snake
+    echo 'Update meta-snake-zero' $YOCTO_BRANCH
+    cd meta-snake-zero
     git fetch
     git pull origin
     #
@@ -51,15 +52,15 @@ then
 fi
 
 # копируем конфигурационные файлы
-cp poky/meta-snake/conf/bblayers.conf.docker build/conf/bblayers.conf
-cp poky/meta-snake/conf/local.conf.example build/conf/local.conf
+cp poky/meta-snake-zero/conf/bblayers.conf.docker build/conf/bblayers.conf
+cp poky/meta-snake-zero/conf/local.conf.example build/conf/local.conf
 
 docker system prune -f
 docker image prune -f
 
 # build docker image
-#docker build . --tag snake-wboard-image:latest
-docker build --no-cache . --tag snake-wboard-image:latest
+#docker build . --tag snake-zboard-image:latest
+docker build --no-cache . --tag snake-zboard-image:latest
 
 # run docker
-docker run --user=user:user -it --rm -v $PWD/build:/home/user/build snake-wboard-image:latest
+docker run --user=user:user -it --rm -v $PWD/build:/home/user/build snake-zboard-image:latest
