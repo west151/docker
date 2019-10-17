@@ -38,5 +38,4 @@ COPY ./poky $YOCTO_INSTALL_PATH
 WORKDIR ${YOCTO_INSTALL_PATH}
 
 # Raspberry Pi Zero Wi-Fi and SDK
-CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake snake-zboard-image && bitbake meta-toolchain-qt5"
-
+CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake ${YOCTO_IMAGE} && bitbake ${YOCTO_SDK}"
