@@ -25,18 +25,14 @@ RUN groupadd -g $host_gid $USER_NAME && useradd -g $host_gid -m -s /bin/bash -u 
 # set user name
 USER $USER_NAME
 
-ENV YOCTO_INSTALL_PATH /home/$USER_NAME/poky
-ENV BUILD_OUTPUT_DIR /home/$USER_NAME/build
+ENV YOCTO_INSTALL_PATH /home/$USER_NAME/yocto-data/poky
+ENV BUILD_OUTPUT_DIR /home/$USER_NAME/yocto-data/build
 
 # mkdir
 RUN mkdir -p $YOCTO_INSTALL_PATH
 RUN mkdir -p $BUILD_OUTPUT_DIR
 
-# copy from host to container
-COPY ./poky $YOCTO_INSTALL_PATH
-
 WORKDIR ${YOCTO_INSTALL_PATH}
 
-# WaveShare Compute Module IO Board Plus and SDK
-CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake snake-wboard-image && bitbake meta-toolchain-qt5"
-
+# WaveShare Compute Module IO Board Plus and SDK or Raspberry pi 4
+CMD /bin/sh -c "source ./oe-init-build-env ../build && bitbake ${YOCTO_IMAGE} && bitbake ${YOCTO_SDK}"

@@ -14,6 +14,10 @@ echo
 YOCTO_BRANCH="warrior"
 QT_VER="5.13"
 
+echo
+echo -e "${CL_GREEN}  1. Git clone or update.${CL_NC}"
+echo
+
 if ! [ -d $(pwd)/poky ];
 then
     echo -e "${CL_YELLOY}Clone poky${CL_NC}"
@@ -68,14 +72,22 @@ fi
 cp poky/meta-snake-zero/conf/bblayers.conf.docker build/conf/bblayers.conf
 cp poky/meta-snake-zero/conf/local.conf.example build/conf/local.conf
 
+echo
+echo -e "${CL_GREEN}  2. Docker prune${CL_NC}"
+echo
 docker system prune -f
 docker image prune -f
 
 # build docker image
-docker build . --tag snake-zboard-image:latest
+echo
+echo -e "${CL_GREEN}  3. Build docker image${CL_NC}"
+echo
 docker build --no-cache . --tag snake-zboard-image:latest
 
 # run docker
+echo
+echo -e "${CL_GREEN}  4. Run docker${CL_NC}"
+echo
 docker run --user=user:user -it --rm \
 --env YOCTO_IMAGE=$NAME_IMAGE \
 --env YOCTO_SDK=$NAME_SDK \
