@@ -6,16 +6,14 @@ CL_NC="\033[0m"
 
 NAME_IMAGE="snake-pi4-image"
 NAME_SDK="meta-toolchain-qt5"
-
-export MACHINE="raspberrypi4"
-#raspberrypi-cm3
+YOCTO_BRANCH="warrior"
+QT_VER="5.13"
+MACHINE="raspberrypi-cm3"
+#raspberrypi-cm3 raspberrypi4
 
 echo
 echo -e "${CL_GREEN}Run build yocto poky.${CL_NC}"
 echo
-
-YOCTO_BRANCH="warrior"
-QT_VER="5.13"
 
 if ! [ -d $(pwd)/yocto-data ];
 then
@@ -81,6 +79,8 @@ fi
 cp poky/meta-snake/conf/bblayers.conf.docker build/conf/bblayers.conf
 cp poky/meta-snake/conf/local.conf.example build/conf/local.conf
 
+#echo 'MACHINE = $MACHINE' >> build/conf/local.conf
+
 echo
 echo -e "${CL_GREEN} 2. Docker prune${CL_NC}"
 echo
@@ -100,9 +100,12 @@ echo
 echo -e "${CL_GREEN} 4. Run docker${CL_NC}"
 echo
 
+echo $PWD
+
 docker run --user=user:user -it --rm \
+--env YOCTO_MACHINE=$MACHINE \
 --env YOCTO_IMAGE=$NAME_IMAGE \
 --env YOCTO_SDK=$NAME_SDK \
--v $PWD/build:/home/user/yocto-data/build snake-wboard-image:latest
+-v $PWD/yocto-data:/home/user/yocto-data snake-wboard-image:latest
 
 exit 0
