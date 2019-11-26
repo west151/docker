@@ -1,3 +1,5 @@
 raspberry/yocto-data/
 raspberry-zero/poky/
 raspberry-zero/build/
+snake-pi4/data/yocto-data/poky/
+snake-pi4/data/yocto-data/build/
