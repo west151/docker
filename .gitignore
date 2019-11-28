@@ -1,5 +1,5 @@
-snake-pi4/data/yocto-data/poky/
-snake-pi4/data/yocto-data/build/
+snake-pi4/yocto-data/poky/
+snake-pi4/yocto-data/build/
 snake-zero/yocto-data/poky/
 snake-zero/yocto-data/build/
 snake-cm3/yocto-data/poky/

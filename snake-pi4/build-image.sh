@@ -22,6 +22,6 @@ docker run --user=user:user -it --rm \
 --env YOCTO_MACHINE=$MACHINE \
 --env YOCTO_IMAGE=$NAME_IMAGE \
 --env YOCTO_SDK=$NAME_SDK \
--v $PWD/yocto-data:/home/user/yocto-data snake-wboard-image:latest
+-v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
 
 exit 0
