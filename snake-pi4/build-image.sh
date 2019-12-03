@@ -13,7 +13,7 @@ echo -e "${CL_GREEN}Run build yocto poky.${CL_NC}"
 
 # run docker
 echo
-echo -e "${CL_GREEN} Run docker${CL_NC}"
+echo -e "${CL_GREEN}Run docker${CL_NC}"
 echo
 
 #echo $PWD

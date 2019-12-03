@@ -22,7 +22,7 @@ fi
 
 cd $(pwd)/yocto-data
 
-echo -e "${CL_GREEN}1. git clone or update.${CL_NC}"
+echo -e "${CL_GREEN}git clone or update.${CL_NC}"
 echo
 
 if ! [ -d $(pwd)/poky ];
@@ -76,6 +76,10 @@ if ! [ -d $(pwd)/build ];
    mkdir build
    mkdir -p build/conf
 fi
+
+echo
+echo -e "${CL_GREEN}copy bblayers.conf and local.conf${CL_NC}"
+echo
 
 # копируем конфигурационные файлы
 cp poky/meta-snake-pi4/conf/bblayers.conf.docker build/conf/bblayers.conf
