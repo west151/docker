@@ -8,6 +8,8 @@ CL_NC="\033[0m"
 YOCTO_BRANCH=$(awk -F"=" '/YOCTO_BRANCH/ {print ($2)}' image.conf)
 QT_VER=$(awk -F"=" '/QT_VER/ {print ($2)}' image.conf)
 
+time=$(date +%s)
+
 echo
 echo -e "${CL_RED}YOCTO_BRANCH:${CL_NC}" $YOCTO_BRANCH
 echo -e "${CL_RED}QT_VER:${CL_NC}" $QT_VER
@@ -45,26 +47,33 @@ if ! [ -d $(pwd)/poky ];
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
    cd poky
    git fetch && git pull origin
+
+   # meta-security
+   echo
+   echo -e "${CL_YELLOY}update meta-security:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)/meta-security ];
+     then
+       git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security
+       cd meta-security
+     else
+       cd meta-security && git fetch && git pull origin
+   fi
    #
    echo
    echo -e "${CL_YELLOY}update meta-snake-pi4:${CL_NC}" $YOCTO_BRANCH
-   cd meta-snake-pi4
-   git fetch && git pull origin
+   cd ../meta-snake-pi4 && git fetch && git pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-openembedded:${CL_NC}" $YOCTO_BRANCH
-   cd ../meta-openembedded
-   git fetch && git pull origin
+   cd ../meta-openembedded && git fetch && git pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-raspberrypi:${CL_NC}" $YOCTO_BRANCH
-   cd ../meta-raspberrypi
-   git fetch && git pull origin
+   cd ../meta-raspberrypi && git fetch && git pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-qt5:${CL_NC}" $QT_VER
-   cd ../meta-qt5
-   git fetch && git pull origin
+   cd ../meta-qt5 && git fetch && git pull origin
    #
    cd ../../
 fi
@@ -84,5 +93,10 @@ echo
 # копируем конфигурационные файлы
 cp poky/meta-snake-pi4/conf/bblayers.conf.docker build/conf/bblayers.conf
 cp poky/meta-snake-pi4/conf/local.conf.example build/conf/local.conf
+
+secs=$(($(date +%s)-$time))
+printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
+
+echo -e "${CL_GREEN}elapsed time: ${CL_NC}" $ts
 
 exit 0

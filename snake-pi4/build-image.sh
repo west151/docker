@@ -8,6 +8,8 @@ NAME_IMAGE="console-image"
 NAME_SDK="meta-toolchain-qt5"
 MACHINE="raspberrypi4"
 
+time=$(date +%s)
+
 echo
 echo -e "${CL_GREEN}Run build yocto poky.${CL_NC}"
 
@@ -23,5 +25,10 @@ docker run --user=user:user -it --rm \
 --env YOCTO_IMAGE=$NAME_IMAGE \
 --env YOCTO_SDK=$NAME_SDK \
 -v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
+
+secs=$(($(date +%s)-$time))
+printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
+
+echo -e "${CL_GREEN}elapsed time: ${CL_NC}" $ts
 
 exit 0
