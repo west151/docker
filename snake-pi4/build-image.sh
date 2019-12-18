@@ -6,7 +6,7 @@ CL_NC="\033[0m"
 
 NAME_IMAGE="console-image"
 NAME_SDK="meta-toolchain-qt5"
-MACHINE="raspberrypi4"
+MACHINE="raspberrypi4-64"
 
 time=$(date +%s)
 
@@ -17,8 +17,6 @@ echo -e "${CL_GREEN}Run build yocto poky.${CL_NC}"
 echo
 echo -e "${CL_GREEN}Run docker${CL_NC}"
 echo
-
-#echo $PWD
 
 docker run --user=user:user -it --rm \
 --env YOCTO_MACHINE=$MACHINE \

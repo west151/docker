@@ -33,49 +33,42 @@ if ! [ -d $(pwd)/poky ];
    echo
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/poky.git poky
    echo
-   cd poky
-   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake-pi4
+   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake-pi4 poky/meta-snake-pi4
    echo
-   git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded
+   git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded poky/meta-openembedded
    echo
-   git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi
+   git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi poky/meta-raspberrypi
    echo
-   git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git
-   #
-   cd ../
+   git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git poky/meta-qt5
  else
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
-   cd poky
-   git fetch && git pull origin
+   git -C poky fetch && git -C poky pull origin
 
    # meta-security
    echo
    echo -e "${CL_YELLOY}update meta-security:${CL_NC}" $YOCTO_BRANCH
-   if ! [ -d $(pwd)/meta-security ];
+   if ! [ -d $(pwd)/poky/meta-security ];
      then
-       git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security
-       cd meta-security
+       git -C poky clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security
      else
-       cd meta-security && git fetch && git pull origin
+       git -C poky/meta-security fetch && git -C poky/meta-security pull origin
    fi
    #
    echo
    echo -e "${CL_YELLOY}update meta-snake-pi4:${CL_NC}" $YOCTO_BRANCH
-   cd ../meta-snake-pi4 && git fetch && git pull origin
+   git -C poky/meta-snake-pi4 fetch && git -C poky/meta-snake-pi4 pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-openembedded:${CL_NC}" $YOCTO_BRANCH
-   cd ../meta-openembedded && git fetch && git pull origin
+   git -C poky/meta-openembedded fetch && git -C poky/meta-openembedded pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-raspberrypi:${CL_NC}" $YOCTO_BRANCH
-   cd ../meta-raspberrypi && git fetch && git pull origin
+   git -C poky/meta-raspberrypi fetch && git -C poky/meta-raspberrypi pull origin
    #
    echo
    echo -e "${CL_YELLOY}update meta-qt5:${CL_NC}" $QT_VER
-   cd ../meta-qt5 && git fetch && git pull origin
-   #
-   cd ../../
+   git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
 fi
 
 # создаем папку "build" для совместного использования с контенером 
