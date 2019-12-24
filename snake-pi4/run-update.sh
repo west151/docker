@@ -53,22 +53,27 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-security fetch && git -C poky/meta-security pull origin
    fi
-   #
+   # meta-snake-pi4
    echo
    echo -e "${CL_YELLOY}update meta-snake-pi4:${CL_NC}" $YOCTO_BRANCH
    git -C poky/meta-snake-pi4 fetch && git -C poky/meta-snake-pi4 pull origin
-   #
+   # meta-openembedded
    echo
    echo -e "${CL_YELLOY}update meta-openembedded:${CL_NC}" $YOCTO_BRANCH
    git -C poky/meta-openembedded fetch && git -C poky/meta-openembedded pull origin
-   #
+   # meta-raspberrypi
    echo
    echo -e "${CL_YELLOY}update meta-raspberrypi:${CL_NC}" $YOCTO_BRANCH
    git -C poky/meta-raspberrypi fetch && git -C poky/meta-raspberrypi pull origin
-   #
+   # meta-qt5
    echo
    echo -e "${CL_YELLOY}update meta-qt5:${CL_NC}" $QT_VER
-   git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
+   if ! [ -d $(pwd)/poky/meta-qt5 ];
+     then
+       git -C poky clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git
+     else
+       git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
+   fi
 fi
 
 # создаем папку "build" для совместного использования с контенером 

@@ -4,9 +4,9 @@ CL_GREEN="\033[0;32m"
 CL_YELLOY="\033[0;33m"
 CL_NC="\033[0m"
 
-NAME_IMAGE="console-image"
-NAME_SDK="meta-toolchain-qt5"
-MACHINE="raspberrypi4-64"
+NAME_IMAGE=$(awk -F"=" '/NAME_IMAGE/ {print ($2)}' image.conf)
+NAME_SDK=$(awk -F"=" '/NAME_SDK/ {print ($2)}' image.conf)
+MACHINE=$(awk -F"=" '/MACHINE/ {print ($2)}' image.conf)
 
 time=$(date +%s)
 
