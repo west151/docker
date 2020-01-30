@@ -14,8 +14,6 @@ echo
 echo -e "${CL_RED}YOCTO_BRANCH:${CL_NC}" $YOCTO_BRANCH
 echo -e "${CL_RED}QT_VER:${CL_NC}" $QT_VER
 echo
-echo -e "${CL_GREEN}Run build yocto poky.${CL_NC}"
-echo
 
 if ! [ -d $(pwd)/yocto-data ];
 then
@@ -40,6 +38,8 @@ if ! [ -d $(pwd)/poky ];
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi poky/meta-raspberrypi
    echo
    git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git poky/meta-qt5
+   echo
+   git clone -b $YOCTO_BRANCH https://github.com/sbabic/meta-swupdate
  else
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
    git -C poky fetch && git -C poky pull origin
@@ -63,8 +63,13 @@ if ! [ -d $(pwd)/poky ];
    git -C poky/meta-openembedded fetch && git -C poky/meta-openembedded pull origin
    # meta-raspberrypi
    echo
-   echo -e "${CL_YELLOY}update meta-raspberrypi:${CL_NC}" $YOCTO_BRANCH
-   git -C poky/meta-raspberrypi fetch && git -C poky/meta-raspberrypi pull origin
+   echo -e "${CL_YELLOY}update meta-raspberry:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)/poky/meta-raspberrypi ];
+     then
+       git -C poky clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi
+     else
+       git -C poky/meta-raspberrypi fetch && git -C poky/meta-raspberrypi pull origin
+   fi
    # meta-qt5
    echo
    echo -e "${CL_YELLOY}update meta-qt5:${CL_NC}" $QT_VER
@@ -73,6 +78,15 @@ if ! [ -d $(pwd)/poky ];
        git -C poky clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git
      else
        git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
+   fi
+   # meta-swupdate
+   echo
+   echo -e "${CL_YELLOY}update meta-swupdate:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)/poky/meta-swupdate ];
+     then
+       git -C poky clone -b $YOCTO_BRANCH https://github.com/sbabic/meta-swupdate
+     else
+       git -C poky/meta-swupdate fetch && git -C poky/meta-swupdate pull origin
    fi
 fi
 
