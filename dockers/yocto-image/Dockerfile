@@ -35,4 +35,4 @@ RUN mkdir -p $BUILD_OUTPUT_DIR
 WORKDIR ${YOCTO_INSTALL_PATH}
 
 # WaveShare Compute Module IO Board Plus and SDK or Raspberry pi 4
-CMD /bin/sh -c "source ./oe-init-build-env ../build && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_IMAGE} && MACHINE=${YOCTO_MACHINE}  bitbake ${YOCTO_SDK}"
+CMD /bin/sh -c "source ./oe-init-build-env ../build && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_IMAGE} && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_SDK}"
