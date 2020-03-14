@@ -33,7 +33,7 @@ if ! [ -d $(pwd)/poky ];
    echo
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security poky/meta-security
    echo
-   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-swu-pi4 poky/meta-swu-pi4
+   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-swupdate-pi4 poky/meta-swupdate-pi4
    echo
    git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded poky/meta-openembedded
    echo
@@ -56,14 +56,14 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-security fetch && git -C poky/meta-security pull origin
    fi
-   # meta-swu-pi4
+   # meta-swupdate-pi4
    echo
-   echo -e "${CL_YELLOY}update meta-swu-pi4:${CL_NC}" $YOCTO_BRANCH
-   if ! [ -d $(pwd)/poky/meta-swu-pi4 ];
+   echo -e "${CL_YELLOY}update meta-swupdate-pi4:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)/poky/meta-swupdate-pi4 ];
      then
-       git -C poky clone -b $YOCTO_BRANCH https://github.com/west151/meta-swu-pi4
+       git -C poky clone -b $YOCTO_BRANCH https://github.com/west151/meta-swupdate-pi4
      else
-       git -C poky/meta-swu-pi4 fetch && git -C poky/meta-swu-pi4 pull origin
+       git -C poky/meta-swupdate-pi4 fetch && git -C poky/meta-swupdate-pi4 pull origin
    fi
    # meta-openembedded
    echo
@@ -111,8 +111,8 @@ echo -e "${CL_GREEN}copy bblayers.conf and local.conf${CL_NC}"
 echo
 
 # копируем конфигурационные файлы
-cp poky/meta-swu-pi4/conf/bblayers.conf.docker build/conf/bblayers.conf
-cp poky/meta-swu-pi4/conf/local.conf.example build/conf/local.conf
+cp poky/meta-swupdate-pi4/conf/bblayers.conf.docker build/conf/bblayers.conf
+cp poky/meta-swupdate-pi4/conf/local.conf.example build/conf/local.conf
 
 secs=$(($(date +%s)-$time))
 printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))

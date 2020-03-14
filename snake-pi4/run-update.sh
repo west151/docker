@@ -38,8 +38,6 @@ if ! [ -d $(pwd)/poky ];
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi poky/meta-raspberrypi
    echo
    git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git poky/meta-qt5
-   echo
-   git clone -b $YOCTO_BRANCH https://github.com/sbabic/meta-swupdate poky/meta-swupdate
  else
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
    git -C poky fetch && git -C poky pull origin
@@ -78,15 +76,6 @@ if ! [ -d $(pwd)/poky ];
        git -C poky clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git
      else
        git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
-   fi
-   # meta-swupdate
-   echo
-   echo -e "${CL_YELLOY}update meta-swupdate:${CL_NC}" $YOCTO_BRANCH
-   if ! [ -d $(pwd)/poky/meta-swupdate ];
-     then
-       git -C poky clone -b $YOCTO_BRANCH https://github.com/sbabic/meta-swupdate
-     else
-       git -C poky/meta-swupdate fetch && git -C poky/meta-swupdate pull origin
    fi
 fi
 
