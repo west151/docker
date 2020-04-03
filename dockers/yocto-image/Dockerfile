@@ -2,9 +2,10 @@
 FROM ubuntu:18.04
 
 # Upgrade system and Yocto Proyect basic dependencies
-RUN apt-get update && apt-get -y install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+RUN apt-get update && apt-get -y install gawk wget git-core diffstat unzip texinfo gcc-multilib g++-multilib \
                   build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
-                  xz-utils debianutils iputils-ping libsdl1.2-dev xterm tar locales mc
+                  xz-utils debianutils iputils-ping libsdl1.2-dev xterm tar locales mc libncurses5-dev \
+                  python3-distutils libdb5.3++-dev
 
 # Replace dash with bash
 RUN rm /bin/sh && ln -s bash /bin/sh
