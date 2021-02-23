@@ -38,6 +38,8 @@ if ! [ -d $(pwd)/poky ];
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi poky/meta-raspberrypi
    echo
    git clone -b $QT_VER git://code.qt.io/yocto/meta-qt6.git poky/meta-qt6
+   echo
+   git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security poky/meta-security
  else
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
    git -C poky fetch && git -C poky pull origin
