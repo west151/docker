@@ -31,7 +31,7 @@ if ! [ -d $(pwd)/poky ];
    echo
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/poky.git poky
    echo
-   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake-pi4 poky/meta-snake-pi4
+   git clone -b $YOCTO_BRANCH git@github.com:west151/meta-snake-cm4.git poky/meta-snake-cm4
    echo
    git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded poky/meta-openembedded
    echo
@@ -53,10 +53,15 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-security fetch && git -C poky/meta-security pull origin
    fi
-   # meta-snake-pi4
+   # meta-snake-cm4
    echo
-   echo -e "${CL_YELLOY}update meta-snake-pi4:${CL_NC}" $YOCTO_BRANCH
-   git -C poky/meta-snake-pi4 fetch && git -C poky/meta-snake-pi4 pull origin
+   echo -e "${CL_YELLOY}update meta-snake-cm4:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)poky/meta-snake-cm4 ];
+     then
+       git -C poky clone -b $YOCTO_BRANCH git@github.com:west151/meta-snake-cm4.git
+     else
+       git -C poky/meta-snake-cm4 fetch && git -C poky/meta-snake pull origin
+   fi
    # meta-openembedded
    echo
    echo -e "${CL_YELLOY}update meta-openembedded:${CL_NC}" $YOCTO_BRANCH
@@ -94,8 +99,8 @@ echo -e "${CL_GREEN}copy bblayers.conf and local.conf${CL_NC}"
 echo
 
 # копируем конфигурационные файлы
-cp poky/meta-snake-pi4/conf/bblayers.conf.docker build/conf/bblayers.conf
-cp poky/meta-snake-pi4/conf/local.conf.example build/conf/local.conf
+cp poky/meta-snake-cm4/conf/bblayers.conf.docker build/conf/bblayers.conf
+cp poky/meta-snake-cm4/conf/local.conf.example build/conf/local.conf
 
 secs=$(($(date +%s)-$time))
 printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
