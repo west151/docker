@@ -56,11 +56,11 @@ if ! [ -d $(pwd)/poky ];
    # meta-snake-cm4
    echo
    echo -e "${CL_YELLOY}update meta-snake-cm4:${CL_NC}" $YOCTO_BRANCH
-   if ! [ -d $(pwd)poky/meta-snake-cm4 ];
+   if ! [ -d $(pwd)/poky/meta-snake-cm4 ];
      then
        git -C poky clone -b $YOCTO_BRANCH git@github.com:west151/meta-snake-cm4.git
      else
-       git -C poky/meta-snake-cm4 fetch && git -C poky/meta-snake pull origin
+       git -C poky/meta-snake-cm4 fetch && git -C poky/meta-snake-cm4 pull origin
    fi
    # meta-openembedded
    echo
