@@ -10,3 +10,5 @@ swupdate-pi4/yocto-data/poky/
 swupdate-pi4/yocto-data/build/
 snake-cm4/yocto-data/poky/
 snake-cm4/yocto-data/build/
+snake-cm4-qt6/yocto-data/poky/
+snake-cm4-qt6/yocto-data/build/
