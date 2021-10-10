@@ -22,7 +22,7 @@ docker run --user=user:user -it --rm \
 --env YOCTO_MACHINE=$MACHINE \
 --env YOCTO_IMAGE=$NAME_IMAGE \
 --env YOCTO_SDK=$NAME_SDK \
--v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
+-v $PWD/yocto-data:/home/user/yocto-data yocto-image-v2:latest
 
 secs=$(($(date +%s)-$time))
 printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
