@@ -12,3 +12,5 @@ snake-cm4/yocto-data/poky/
 snake-cm4/yocto-data/build/
 snake-cm4-qt6/yocto-data/poky/
 snake-cm4-qt6/yocto-data/build/
+worm-pi4/yocto-data/poky/
+worm-pi4/yocto-data/build/
