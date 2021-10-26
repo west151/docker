@@ -86,6 +86,15 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-qt5 fetch && git -C poky/meta-qt5 pull origin
    fi
+   # meta-virtualization
+   echo
+   echo -e "${CL_YELLOY}update meta-virtualization:${CL_NC}" $YOCTO_BRANCH
+   if ! [ -d $(pwd)/poky/meta-virtualization ];
+     then
+       git -C poky clone -b $YOCTO_BRANCH http://git.yoctoproject.org/git/meta-virtualization
+     else
+       git -C poky/meta-virtualization fetch && git -C poky/meta-virtualization pull origin
+   fi
 fi
 
 # создаем папку "build" для совместного использования с контенером 
