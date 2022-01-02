@@ -21,11 +21,11 @@ echo
 echo -e "${CL_GREEN}Run docker${CL_NC}"
 echo
 
-#docker run --user=user:user -it --rm \
-#--env YOCTO_MACHINE=$MACHINE \
-#--env YOCTO_IMAGE=$NAME_IMAGE \
-#--env YOCTO_SDK=$NAME_SDK \
-#-v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
+docker run --user=user:user -it --rm \
+--env YOCTO_MACHINE=$MACHINE \
+--env YOCTO_IMAGE=$NAME_IMAGE \
+--env YOCTO_SDK=$NAME_SDK \
+-v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
 
 echo -e "${CL_GREEN}elapsed time: ${CL_NC}" $ts
 echo
