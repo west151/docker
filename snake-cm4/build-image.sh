@@ -5,7 +5,6 @@ CL_YELLOY="\033[0;33m"
 CL_NC="\033[0m"
 
 WORK_DIR=$(pwd)
-
 NAME_IMAGE=$(awk -F"=" '/NAME_IMAGE/ {print ($2)}' image.conf)
 NAME_SDK=$(awk -F"=" '/NAME_SDK/ {print ($2)}' image.conf)
 MACHINE=$(awk -F"=" '/MACHINE/ {print ($2)}' image.conf)
