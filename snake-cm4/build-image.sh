@@ -26,25 +26,25 @@ docker run --user=user:user -it --rm \
 --env YOCTO_SDK=$NAME_SDK \
 -v $PWD/yocto-data:/home/user/yocto-data yocto-image:latest
 
-echo -e "${CL_GREEN}elapsed time: ${CL_NC}" $ts
-echo
-
-echo -e "${CL_GREEN}Deploy image: ${CL_NC}" $ts
+echo -e "${CL_GREEN}Deploy image: ${CL_NC}"
 echo
 
 if [ -d ${TARGET_DEPLOY} ]; then
    #
    mkdir -p ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)
    #
-   echo -e "${CL_GREEN}Copy image: ${CL_NC}" $ts
+   echo -e "${CL_GREEN}Copy image: ${CL_NC}"
    rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/images/raspberrypi4-64/*rootfs.rpi-sdimg ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)/
    #
    echo
-   echo -e "${CL_GREEN}Copy sdk: ${CL_NC}" $ts
+   echo -e "${CL_GREEN}Copy sdk: ${CL_NC}"
    rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/sdk/*.sh ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)/
 fi
 
 secs=$(($(date +%s)-$time))
 printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
+
+echo -e "${CL_GREEN}elapsed time: ${CL_NC}" $ts
+echo
 
 exit 0
