@@ -9,7 +9,9 @@ NAME_IMAGE=$(awk -F"=" '/NAME_IMAGE/ {print ($2)}' image.conf)
 NAME_SDK=$(awk -F"=" '/NAME_SDK/ {print ($2)}' image.conf)
 MACHINE=$(awk -F"=" '/MACHINE/ {print ($2)}' image.conf)
 TARGET_DEPLOY=$(awk -F"=" '/TARGET_DEPLOY/ {print ($2)}' image.conf)
-TARGET_SUBDIR=snake-cm4-qt6
+YOCTO_BRANCH=$(awk -F"=" '/YOCTO_BRANCH/ {print ($2)}' image.conf)
+QT_VER=$(awk -F"=" '/QT_VER/ {print ($2)}' image.conf)
+TARGET_SUBDIR=snake-cm4-qt6/${YOCTO_BRANCH}/qt-${QT_VER}
 
 time=$(date +%s)
 
