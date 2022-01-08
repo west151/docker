@@ -9,6 +9,10 @@ NAME_IMAGE=$(awk -F"=" '/NAME_IMAGE/ {print ($2)}' image.conf)
 NAME_SDK=$(awk -F"=" '/NAME_SDK/ {print ($2)}' image.conf)
 MACHINE=$(awk -F"=" '/MACHINE/ {print ($2)}' image.conf)
 TARGET_DEPLOY=$(awk -F"=" '/TARGET_DEPLOY/ {print ($2)}' image.conf)
+YOCTO_BRANCH=$(awk -F"=" '/YOCTO_BRANCH/ {print ($2)}' image.conf)
+QT_VER=$(awk -F"=" '/QT_VER/ {print ($2)}' image.conf)
+TARGET_SUBDIR=snake-cm4/${YOCTO_BRANCH}/qt-${QT_VER}
+
 
 time=$(date +%s)
 
@@ -31,14 +35,14 @@ echo
 
 if [ -d ${TARGET_DEPLOY} ]; then
    #
-   mkdir -p ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)
+   mkdir -p ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)
    #
    echo -e "${CL_GREEN}Copy image: ${CL_NC}"
-   rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/images/raspberrypi4-64/*rootfs.rpi-sdimg ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)/
+   rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/images/raspberrypi4-64/*rootfs.rpi-sdimg ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
    #
    echo
    echo -e "${CL_GREEN}Copy sdk: ${CL_NC}"
-   rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/sdk/*.sh ${TARGET_DEPLOY}/snake-cm4/$(date +%Y%m%d)/
+   rsync --progress ${WORK_DIR}/yocto-data/build/tmp/deploy/sdk/*.sh ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
 fi
 
 secs=$(($(date +%s)-$time))
