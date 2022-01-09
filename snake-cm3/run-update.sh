@@ -31,18 +31,19 @@ if ! [ -d $(pwd)/poky ];
    echo
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/poky.git poky
    echo
-   git clone -b $YOCTO_BRANCH https://github.com/west151/meta-snake-cm3 poky/meta-snake-cm3
+   git clone -b $YOCTO_BRANCH git@github.com:west151/meta-snake-cm3 poky/meta-snake-cm3
    echo
    git clone -b $YOCTO_BRANCH git://git.openembedded.org/meta-openembedded poky/meta-openembedded
    echo
    git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-raspberrypi poky/meta-raspberrypi
+   echo
+   git clone -b $YOCTO_BRANCH git://git.yoctoproject.org/meta-security poky/meta-security
    echo
    git clone -b $QT_VER git://code.qt.io/yocto/meta-qt5.git poky/meta-qt5
  else
    echo -e "${CL_YELLOY}update poky:${CL_NC}" $YOCTO_BRANCH
    git -C poky fetch && git -C poky pull origin
 
-   #######################
    # meta-security
    echo
    echo -e "${CL_YELLOY}update meta-security:${CL_NC}" $YOCTO_BRANCH
@@ -52,7 +53,7 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-security fetch && git -C poky/meta-security pull origin
    fi
-   ########################
+
    # meta-snake-cm3
    echo
    echo -e "${CL_YELLOY}update meta-snake-cm3:${CL_NC}" $YOCTO_BRANCH
@@ -62,15 +63,17 @@ if ! [ -d $(pwd)/poky ];
      else
        git -C poky/meta-snake-cm3 fetch && git -C poky/meta-snake-cm3 pull origin
    fi
-   #######################
+
    # meta-openembedded
    echo
    echo -e "${CL_YELLOY}update meta-openembedded:${CL_NC}" $YOCTO_BRANCH
    git -C poky/meta-openembedded fetch && git -C poky/meta-openembedded pull origin
+
    # meta-raspberrypi
    echo
    echo -e "${CL_YELLOY}update meta-raspberrypi:${CL_NC}" $YOCTO_BRANCH
    git -C poky/meta-raspberrypi fetch && git -C poky/meta-raspberrypi pull origin
+
    # meta-qt5
    echo
    echo -e "${CL_YELLOY}update meta-qt5:${CL_NC}" $QT_VER
