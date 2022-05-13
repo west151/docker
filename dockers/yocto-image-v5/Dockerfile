@@ -39,4 +39,4 @@ RUN mkdir -p $BUILD_OUTPUT_DIR
 WORKDIR ${YOCTO_INSTALL_PATH}
 
 # build image
-CMD /bin/sh -c "source ./oe-init-build-env ../build && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_IMAGE}"
+CMD /bin/sh -c "source ./oe-init-build-env ../build && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_IMAGE} && MACHINE=${YOCTO_MACHINE} bitbake ${YOCTO_SDK}"
