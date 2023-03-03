@@ -12,7 +12,7 @@ TARGET_DEPLOY=$(awk -F"=" '/TARGET_DEPLOY/ {print ($2)}' image.conf)
 YOCTO_BRANCH=$(awk -F"=" '/YOCTO_BRANCH/ {print ($2)}' image.conf)
 CUSTOM_META_BRANCH=$(awk -F"=" '/CUSTOM_META_BRANCH/ {print ($2)}' image.conf)
 QT_VER=$(awk -F"=" '/QT_VER/ {print ($2)}' image.conf)
-TARGET_SUBDIR=$CUSTOM_META_BRANCH/qt-${QT_VER}
+TARGET_SUBDIR=$CUSTOM_META_BRANCH/qt-${QT_VER}/$NAME_IMAGE
 YOCTO_IMAGE_DOCKER=$(awk -F"=" '/YOCTO_IMAGE_DOCKER/ {print ($2)}' image.conf)
 time=$(date +%s)
 

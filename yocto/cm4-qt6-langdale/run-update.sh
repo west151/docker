@@ -5,6 +5,7 @@ CL_GREEN="\033[0;32m"
 CL_YELLOY="\033[0;33m"
 CL_NC="\033[0m"
 
+NAME_IMAGE=$(awk -F"=" '/NAME_IMAGE/ {print ($2)}' image.conf)
 YOCTO_BRANCH=$(awk -F"=" '/YOCTO_BRANCH/ {print ($2)}' image.conf)
 CUSTOM_META_BRANCH=$(awk -F"=" '/CUSTOM_META_BRANCH/ {print ($2)}' image.conf)
 QT_VER=$(awk -F"=" '/QT_VER/ {print ($2)}' image.conf)
@@ -111,8 +112,8 @@ echo -e "${CL_GREEN}copy bblayers.conf and local.conf${CL_NC}"
 echo
 
 # копируем конфигурационные файлы
-cp poky/meta-snake/conf/bblayers.conf.docker build/conf/bblayers.conf
-cp poky/meta-snake/conf/local.conf.example build/conf/local.conf
+cp poky/meta-snake/conf/bblayers.conf.$NAME_IMAGE build/conf/bblayers.conf
+cp poky/meta-snake/conf/local.conf.$NAME_IMAGE build/conf/local.conf
 
 secs=$(($(date +%s)-$time))
 printf -v ts '%dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
