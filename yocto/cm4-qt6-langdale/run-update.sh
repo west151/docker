@@ -17,12 +17,12 @@ echo -e "${CL_RED}YOCTO_BRANCH:${CL_NC}" $YOCTO_BRANCH
 echo -e "${CL_RED}QT_VER:${CL_NC}" $QT_VER
 echo
 
-if ! [ -d $(pwd)/yocto-data ];
+if ! [ -d $(pwd)/yocto-data/$NAME_IMAGE ];
 then
-    mkdir yocto-data
+    mkdir -p yocto-data/$NAME_IMAGE
 fi
 
-cd $(pwd)/yocto-data
+cd $(pwd)/yocto-data/$NAME_IMAGE
 
 echo -e "${CL_GREEN}git clone or update.${CL_NC}"
 echo
