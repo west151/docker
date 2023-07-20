@@ -18,9 +18,6 @@ yocto/kirkstone/yocto-data/poky/
 yocto/kirkstone/yocto-data/build/
 yocto/langdale/yocto-data/poky/
 yocto/langdale/yocto-data/build/
-yocto/cm4-qt6-langdale/yocto-data/poky/
-yocto/cm4-qt6-langdale/yocto-data/build/
-yocto/cm4-mini-langdale/yocto-data/poky/
-yocto/cm4-mini-langdale/yocto-data/build/
-yocto/cm4-mini-mickledore/yocto-data/poky/
-yocto/cm4-mini-mickledore/yocto-data/build/
+yocto/cm4-qt6-langdale/yocto-data/
+yocto/cm4-mini-langdale/yocto-data/
+yocto/cm4-mini-mickledore/yocto-data/

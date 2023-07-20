@@ -27,15 +27,7 @@ echo
 docker run --user=user:user -it --rm \
 --env YOCTO_MACHINE=$MACHINE \
 --env YOCTO_IMAGE=$NAME_IMAGE \
---env YOCTO_SDK=$NAME_SDK \
 -v $PWD/yocto-data/$NAME_IMAGE:/home/user/yocto-data $YOCTO_IMAGE_DOCKER
-
-if [ ! -f ${WORK_DIR}/yocto-data/$NAME_IMAGE/build/tmp/deploy/images/raspberrypi4-64/*rootfs.rpi-sdimg ]; then
-  echo
-  echo -e "${CL_RED} Can't finde image: *rootfs.rpi-sdimg ${CL_NC}"
-  echo
-  exit 1
-fi
 
 echo -e "${CL_GREEN}Deploy image: ${CL_NC}"
 echo
@@ -45,11 +37,11 @@ if [ -d ${TARGET_DEPLOY} ]; then
    mkdir -p ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)
    #
    echo -e "${CL_GREEN}Copy image: ${CL_NC}"
-   rsync --progress ${WORK_DIR}/yocto-data/$NAME_IMAGE/build/tmp/deploy/images/raspberrypi4-64/*rootfs.rpi-sdimg ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
-   #
-   echo
-   echo -e "${CL_GREEN}Copy sdk: ${CL_NC}"
-   rsync --progress ${WORK_DIR}/yocto-data/$NAME_IMAGE/build/tmp/deploy/sdk/*.sh ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
+   rsync --progress ${WORK_DIR}/yocto-data/$NAME_IMAGE/build/tmp/deploy/images/raspberrypi4-64/$NAME_IMAGE-*rootfs.rpi-sdimg ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
+
+   echo -e "${CL_GREEN}Copy manifest: ${CL_NC}"
+   rsync --progress ${WORK_DIR}/yocto-data/$NAME_IMAGE/build/tmp/deploy/images/raspberrypi4-64/$NAME_IMAGE-*rootfs.manifest ${TARGET_DEPLOY}/${TARGET_SUBDIR}/$(date +%Y%m%d)/
+
 fi
 
 secs=$(($(date +%s)-$time))
